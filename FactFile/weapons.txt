@@ -1,0 +1,9 @@
+[1] standard:
+mage:
+wand
+Barbarian:
+club
+Thief:
+dagger
+Warrior:
+sword

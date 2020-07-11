@@ -1,0 +1,12 @@
+[2]:
+mage:
+fire ball
+
+Barbarian:
+relentless rage
+
+Thief:
+executioners malice
+
+Warrior:
+Splintering Shot
