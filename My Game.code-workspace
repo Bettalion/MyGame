@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\srinath\\Documents\\school during coronavirus\\python"
+		}
+	],
+	"settings": {
+		"workbench.iconTheme": "ayu",
+		"workbench.settings.openDefaultSettings": true,
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 100,
+		"workbench.commandPalette.preserveInput": true,
+		"debug.allowBreakpointsEverywhere": true,
+		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe"
+	}
+}
