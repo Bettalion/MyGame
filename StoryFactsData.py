@@ -1,4 +1,5 @@
 import random
+from monsters import *
 Location='Location'
 
 gameName='Game'
@@ -40,6 +41,9 @@ def NameMaker(alphabet):
  for _ in range(2,random.randint(3,7)):
   name+=random.choice(alphabet)
  return name
+
+alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
 def makemon():
  alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
  mon_disc=['an average monster','a normal monster']
