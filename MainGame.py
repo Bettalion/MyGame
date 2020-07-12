@@ -1,20 +1,32 @@
 from monsters import *
 from player import *
 from Leaving import *
+from GUI import *
 import time
-import StoryFacts as sf
+import StoryFactsData as sf
 
+def MonsterAttack(mon,PLAYER):
+  print(mon.name,'attacked you!')
+  PLAYER.health-=mon.attack
+  
 def attack(PLAYER,mon):
  print(f'{mon.name} a {mon.classt} type monster gets ready to fight you!')
- print(f'{PLAYER.name}:\nHealth:{PLAYER.health} Attack:{PLAYER.attack} Class:{PLAYER.classt} Element:{PLAYER.element}')
- print(f'{mon.name}:\nHealth:{mon.health} Attack:{mon.attack} Class:{mon.classt}')
- time.sleep(4)
+ print(f'{PLAYER.name}:\nHealth:{PLAYER.health} Class:{PLAYER.classt} Element:{PLAYER.element}')
+ print(f'{mon.name}:\nHealth:{mon.health} Class:{mon.classt}')
+ time.sleep(2)
+ gui=GUI(PLAYER,mon)
+ gui.options()
+ while mon.health>0 and PLAYER.health>0:
+   print(f'\n{mon.name}: Health:{mon.health}\n{PLAYER.name}: Health:{PLAYER.health}')
+   gui.options()
+   MonsterAttack(mon,PLAYER)
 
 def story1(PLAYER,MONSTERS):
  mon=random.choice(MONSTERS)
  attack(PLAYER,mon)
 
 def MakeMonsters(BaseLevel):
+ BaseLevel=int(BaseLevel)
  if BaseLevel==5:
   BaseLevel=25
  BaseLevel+=10
@@ -32,7 +44,7 @@ def MakeMonsters(BaseLevel):
 def main():
  gameName=sf.gameName
  classes=sf.classes
- elements=sf.elemets
+ elements=sf.elements
  print(f'Welcome to {gameName}')
  name=input('Enter Player name:')
  print(f'The classes available are:{classes}')
@@ -55,9 +67,15 @@ def main():
  MONSTERS=MakeMonsters(BaseLevel)
  story1(PLAYER)
 if __name__=='__main__':
- # main()
+#  main()
 
- # testing 
+#  # testing 
  PLAYER=Player('Testing','Mage','Fire')
  MONSTERS=MakeMonsters(1)
- story1(PLAYER,MONSTERS)
+ mon=random.choice(MONSTERS)
+ attack(PLAYER,mon)
+#  gui=GUI(PLAYER,mon)
+#  print(mon.health)
+#  gui.options()
+#  print(mon.health)
+# #  story1(PLAYER,MONSTERS)
