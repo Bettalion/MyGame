@@ -1,3 +1,4 @@
+import random
 Location='Location'
 
 gameName='Game'
@@ -11,7 +12,7 @@ mons4,monse4,monsd4,fin4 ='Mons4','water','description of mons4','you were kille
 mons5,monse5,monsd5,fin5 ='Mons5','wind','description of mons5','you were killed'
 mons6,monse6,monsd6,fin6 ='Mons6','earth','description of mons6','you were killed'
 mons7,monse7,monsd7,fin7 ='Mons7','water','description of mons7','you were killed'
-
+Bosses=['Bettasimha',mons1,mons2,mons3,mons4,mons5,mons6,mons7]
 # player attacks:
 # Mage:
 def MageAttacks():
@@ -29,3 +30,21 @@ def ThiefAttacks():
 def WarriorAttacks():
  wal1n,wal1d,wal2n,wal2d,wah1n,wah1d,wah2n,wah2d = 'war light 1',7,'war light 2',7,'war heavy 1',10,'war heavy 2',10
  return [wal1n,wal1d,wal2n,wal2d,wah1n,wah1d,wah2n,wah2d]
+
+# Items:
+AvailableItems=['[1] Standard Wand','[2] Fire Ball ','[1] Standard Club','[2] Relentless Rage ','[1] Standard Dagger','[2] Executioners Malice ','[1] Standard Sword','[2] Splintering Shot ']
+
+# avg mon:
+def NameMaker(alphabet):
+ name=''
+ for _ in range(2,random.randint(3,7)):
+  name+=random.choice(alphabet)
+ return name
+def makemon():
+ alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+ mon_disc=['an average monster','a normal monster']
+ mon=Monster(sf.NameMaker(sf.alphabet),random.choice(['Fire','Water','Earth','Wind']),random.choice(mon_disc),'have been killed')
+ return mon
+
+# Chance  (light,run)
+chance=[84,4,108]
