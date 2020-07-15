@@ -2,11 +2,130 @@ from tkinter import *
 import time
 import StoryFactsData as sf
 import random
+from Leaving import *
 
 class GUI:
  def __init__(self,player,mons):
   self.playert=player
   self.mons=mons
+ def Homescreen(self):
+   Home=Tk()
+   Home.title(f'{sf.gameName} - HomeScreen')
+   Home.configure(bg='light blue')
+
+   def showstates():
+      # % (vars1.get(), vars2.get(),vars3.get(), vars4.get())
+    if len(NameE.get()) >=1:
+     returnValue=[NameE.get()]
+    else:
+      returnValue=['NoName']
+    cont=[]
+    elementssum=(var1.get()+var2.get()+var3.get()+var4.get())
+    classsum=(vars1.get()+vars2.get()+vars3.get()+vars4.get())
+    if classsum > 1 or classsum <=0:
+      print('Invalid class')
+      cont.append(False)
+      # leave('entered the wrong credentials')
+    if elementssum > 1 or elementssum <=0:
+      print('Invalid element')
+      cont.append(False)
+    if len(cont) == 0:
+     if var1.get() ==1:
+      returnValue.append(sf.elements[0])
+     if var2.get() ==1:
+      returnValue.append(sf.elements[1])
+     if var3.get() ==1:
+      returnValue.append(sf.elements[2])
+     if var4.get() ==1:
+      returnValue.append(sf.elements[3])
+     if vars1.get() ==1:
+      returnValue.append(sf.classes[0])
+     if vars2.get() ==1:
+      returnValue.append(sf.classes[1])
+     if vars3.get() ==1:
+      returnValue.append(sf.classes[2])
+     if vars4.get() ==1:
+      returnValue.append(sf.classes[3])
+    # print(returnValue)
+     difflevel=8
+     print(f'The Character you have chosen is:\nNamed: {returnValue[0]}\nClass: {returnValue[2]}  Element: {returnValue[1]}\n\nYou have also chosen difficulty level {difflevel}')
+
+   Label(Home,text=f'Welcome to {sf.gameName}!',bg='light blue',font=("Helvetica Neue", 44)).grid(row=0,column=0,columnspan=8)
+   Label(Home,text='A game made by Project Bettalion',bg='light blue',font=("Helvetica Neue", 10,'italic'),pady=25).grid(column=0)
+   NameE=Entry(Home,bg='grey')
+   NameE.grid(column=1,row=2)
+   Label(Home,text='Name:',pady=10,bg='light blue').grid(column=0,row=2)
+  #  Label(Home,text=f'Clases available: {sf.classes}',bg='light blue').grid(column=0,row=3)
+   Label(Home,text='Prefered Class:',pady=10,bg='light blue').grid(column=0,row=4)
+   vars1=IntVar()
+   vars2=IntVar()
+   vars3=IntVar()
+   vars4=IntVar()
+   ClassE1=Checkbutton(Home,bg='grey',text=sf.classes[0],variable=vars1)
+   ClassE2=Checkbutton(Home,bg='grey',text=sf.classes[1],variable=vars2)
+   ClassE3=Checkbutton(Home,bg='grey',text=sf.classes[2],variable=vars3)
+   ClassE4=Checkbutton(Home,bg='grey',text=sf.classes[3],variable=vars4)
+   ClassE1.grid(column=1,row=4)
+   ClassE2.grid(column=2,row=4)
+   ClassE3.grid(column=1,row=5)
+   ClassE4.grid(column=2,row=5)
+   
+  #  Label(Home,text=f'Available elements: {sf.elements}',bg='light blue').grid(column=0,row=5)
+   var1=IntVar()
+   var2=IntVar()
+   var3=IntVar()
+   var4=IntVar()
+   ElementE1=Checkbutton(Home,bg='grey',text=sf.elements[0],variable=var1)
+   ElementE2=Checkbutton(Home,bg='grey',text=sf.elements[1],variable=var2)
+   ElementE3=Checkbutton(Home,bg='grey',text=sf.elements[2],variable=var3)
+   ElementE4=Checkbutton(Home,bg='grey',text=sf.elements[3],variable=var4)
+   Label(Home,text='Prefered Element:',pady=10,bg='light blue').grid(column=0,row=6)
+   ElementE1.grid(column=1,row=6)
+   ElementE2.grid(column=2,row=6)
+   ElementE3.grid(column=1,row=7)
+   ElementE4.grid(column=2,row=7)
+   
+   submitb=Button(Home,text='Start Game',bg='red',command=showstates).grid(row=8,columnspan=4)
+   
+   Home.mainloop()
+   return [] #name,ele,class,diff
+ def CapturePet(self,pet):
+   win= Tk()
+   self.win=win
+   self.pet=pet
+   win.title('Capture Pet')
+   TryB=Button(win,text=f'Try to capture {pet.name}',command=self.CapPet)
+   TryB.grid(row=0,column=0,columnspan=2)
+   backB=Button(win,text='Back',command=self.returnB)
+   backB.grid(row=1,column=0,columnspan=2)
+   self.win.mainloop()
+ def CapPet(self):
+   self.closewin()
+   num2find=random.randint(1,self.pet.CapDiff)
+   Rnumber=random.randint(1,self.pet.CapDiff)
+   print(Rnumber,num2find)
+   if Rnumber == num2find:
+     capwin=Tk()
+     capwin.title('Well done!')
+     Label(capwin,text=f'You were able to capture {self.pet.name}\nWell Done',padx=25).grid(row=0,column=0,columnspan=2) 
+     choice=input(f'Would you like to change {self.pet.name}\'s name?(Y/N)').upper()
+     if choice == 'Y':
+       print(f'Enter the new name of {self.pet.name} in the window above. Then exit to continue the game')
+       namegetb=Entry(capwin)
+       namegetb.grid(row=1,column=0)
+       self.namegetb=namegetb
+       submitb=Button(capwin,text='Submit',command=self.getName)
+       submitb.grid(row=1,column=1)
+   else:
+     capwin=Tk()
+     capwin.title('Unfortunate')
+     Label(capwin,text=f'You were unable to capture {self.pet.name}',padx=25).pack()
+   capwin.mainloop()
+   
+ def getName(self):
+   NewName=self.namegetb.get()
+   print(NewName)
+   self.pet.name=NewName
  def closewin(self):
    self.win.destroy()
  def returnB(self):
@@ -114,17 +233,17 @@ class GUI:
  def Runnable(self):
     runwin=Tk()
     runwin.title('Can You Run?')
-  #  if self.mons.name in sf.Bosses:
-  #    Label(runwin,text='You are not able to run from a Boss!').pack()
-  #    time.sleep(1.5)
-  #  else:
-    self.closewin()
-    if self.chance2run in sf.chance:
-      time.sleep(random.randint(0,3))
-      Label(runwin,text='You were able to Run!',padx=5).pack()
+    if self.mons.name in sf.Bosses:
+     time.sleep(0.25)
+     Label(runwin,text='You are not able to run from a Boss!').pack()
     else:
-      time.sleep(random.randint(0,2))
-      Label(runwin,text='You were not able to Run!',padx=5).pack()
+      self.closewin()
+      if self.chance2run in sf.chance:
+        time.sleep(random.randint(0,3))
+        Label(runwin,text='You were able to Run!',padx=5).pack()
+      else:
+        time.sleep(random.randint(0,2))
+        Label(runwin,text='You were not able to Run!',padx=5).pack()
     time.sleep(random.randint(1,3))
     runwin.mainloop()
     runwin.destroy()
@@ -152,7 +271,7 @@ class GUI:
    if Level=='5':
      Damage=75
    if Type==1:
-     Damage+=5
+     Damage+=5+random.randint(-2,2)
    else:
      Damage+=10
    print(f'It dealt {Damage}!')
@@ -160,8 +279,5 @@ class GUI:
    
 
    
-   
-# x=player()
-# s=player()
-# now=GUI(x,s)
-# now.options()
+gui=GUI('x','z')
+gui.Homescreen()

@@ -1,18 +1,24 @@
 from monsters import *
 from player import *
+from pet import *
 from Leaving import *
 from GUI import *
 import time
 import StoryFactsData as sf
 
-
+def capture(Player,PetName):
+    pet=Pet(PetName,Player.baselevel)
+    gui=GUI(Player,'_')
+    gui.CapturePet(pet)
+    
 def MonsterAttack(mon, PLAYER):
     if mon.name in sf.Bosses:
+        damage=mon.attack+random.randint(0,3*Baselevel)
         print(
-            f'{mon.name} a {mon.classt} type Boss monster attacks you!\nThey dealt {mon.attack} damage')
+            f'{mon.name} a {mon.classt} type Boss monster attacks you!\nThey dealt {damage} damage')
     else:
         print(f'{mon.name} attacked you!')
-    PLAYER.health -= mon.attack
+    PLAYER.health -= damage
 
 
 def attack(PLAYER, mon):
@@ -84,16 +90,32 @@ def main():
         f'\nWelecome {PLAYER.name}\nWe are starting the {gameName} please wait while this happens')
     MONSTERS = MakeMonsters(BaseLevel)
     story1(PLAYER, MONSTERS, BaseLevel)
+def NameMaker(alphabet):
+ name=''
+ for _ in range(4,random.randint(5,10)):
+  name+=random.choice(alphabet)
+ name=name.capitalize()
+ return name
 
+# def makeamon():
+ alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+ mon_disc=['an average monster','a normal monster']
+ mon=Monster(NameMaker(alphabet),random.choice(['Fire','Water','Earth','Wind']),random.choice(mon_disc),1,'have been killed')
+ return mon
 
 if __name__ == '__main__':
     #  main()
 
     #  # testing
-    PLAYER = Player('Testing', 'Mage', 'Fire')
-    MONSTERS = MakeMonsters(1)
-    mon = random.choice(MONSTERS)
-    attack(PLAYER, mon)
+    gui=GUI('x','z')
+    gui.Homescreen()
+    # PLAYER = Player('Testing', 'Mage', 'Fire',1)
+    # MONSTERS = MakeMonsters(1)
+    # mon = random.choice(MONSTERS)
+    # m=makeamon()
+    # print(m.name)
+    # attack(PLAYER, mon)
+    # capture(PLAYER,NameMaker(['a','b','c','d','e']))
 #  gui=GUI(PLAYER,mon)
 #  print(mon.health)
 #  gui.options()

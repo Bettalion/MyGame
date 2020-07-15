@@ -1,7 +1,7 @@
 import random
 from monsters import *
 Location='Location'
-
+# Monster(1,2,3,4)
 gameName='Game'
 classes=['Mage','Warrior','Barbarian','Thief']
 elements=['Fire','Water','Earth','Wind']
@@ -35,20 +35,8 @@ def WarriorAttacks():
 # Items:
 AvailableItems=['[1] Standard Wand','[2] Fire Ball ','[1] Standard Club','[2] Relentless Rage ','[1] Standard Dagger','[2] Executioners Malice ','[1] Standard Sword','[2] Splintering Shot ']
 
-# avg mon:
-def NameMaker(alphabet):
- name=''
- for _ in range(2,random.randint(3,7)):
-  name+=random.choice(alphabet)
- return name
-
 alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-def makemon():
- alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','o','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
- mon_disc=['an average monster','a normal monster']
- mon=Monster(sf.NameMaker(sf.alphabet),random.choice(['Fire','Water','Earth','Wind']),random.choice(mon_disc),'have been killed')
- return mon
 
 # Chance  (light,run)
 chance=[84,4,108]
