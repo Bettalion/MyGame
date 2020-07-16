@@ -13,7 +13,7 @@ def capture(Player,PetName):
     
 def MonsterAttack(mon, PLAYER):
     if mon.name in sf.Bosses:
-        damage=mon.attack+random.randint(0,3*Baselevel)
+        damage=mon.attack+random.randint(0,3*PLAYER.baselevel)
         print(
             f'{mon.name} a {mon.classt} type Boss monster attacks you!\nThey dealt {damage} damage')
     else:
@@ -23,8 +23,8 @@ def MonsterAttack(mon, PLAYER):
 
 def attack(PLAYER, mon):
     print(f'{mon.name} a {mon.classt} type monster gets ready to fight you!')
-    print(f'{PLAYER.name}:  Health:{PLAYER.health} Class:{PLAYER.classt} Element:{PLAYER.element}')
-    print(f'{mon.name}:  Health:{mon.health} Class:{mon.classt}')
+    print(f'{PLAYER.name}:  Health:{PLAYER.health}  Class:{PLAYER.classt}  Element:{PLAYER.element}')
+    print(f'{mon.name}:  Health:{mon.health}  Class:{mon.classt}')
     time.sleep(2)
     gui = GUI(PLAYER, mon)
     while mon.health > 0 and PLAYER.health > 0:
@@ -64,32 +64,45 @@ def MakeMonsters(BaseLevel):
 
 
 def main():
-    gameName = sf.gameName
-    classes = sf.classes
-    elements = sf.elements
-    print(f'Welcome to {gameName}')
-    name = input('Enter Player name:')
-    print(f'The classes available are:{classes}')
-    classt = input('Enter prefered Class:').capitalize()
-    if classt not in classes:
-        print('Invalid class')
-        leave('entered the wrong credentials')
-    else:
-        print(f'The elements available are:{elements}')
-        element = input('Enter prefered Element:').capitalize()
-        if element not in elements:
-            print('Invalid element')
-            leave('entered the wrong credentials')
+    # gameName = sf.gameName
+    # classes = sf.classes
+    # elements = sf.elements
+    # print(f'Welcome to {gameName}')
+    # name = input('Enter Player name:')
+    # print(f'The classes available are:{classes}')
+    # classt = input('Enter prefered Class:').capitalize()
+    # if classt not in classes:
+    #     print('Invalid class')
+    #     leave('entered the wrong credentials')
+    # else:
+    #     print(f'The elements available are:{elements}')
+    #     element = input('Enter prefered Element:').capitalize()
+    #     if element not in elements:
+    #         print('Invalid element')
+    #         leave('entered the wrong credentials')
+    # try:
+    #     PLAYER = Player(name, classt, element)
+    # except:
+    #     pass
+    # BaseLevel = input(
+    #     'What level Would you like to play at, we include Easy ->Insane ?(1-5)')
+    
+    
+    gui=GUI('_','_')
+    PlayerStat=gui.Homescreen()
     try:
-        PLAYER = Player(name, classt, element)
+        PLAYER = Player(PlayerStat[0],PlayerStat[1],PlayerStat[2],PlayerStat[3]) # name, classt, element, baselevel
     except:
         pass
-    BaseLevel = input(
-        'What level Would you like to play at, we include Easy ->Insane ?(1-5)')
+    BaseLevel=PlayerStat[3]
     print(
-        f'\nWelecome {PLAYER.name}\nWe are starting the {gameName} please wait while this happens')
+        f'\nWelecome {PLAYER.name}\nWe are starting the {sf.gameName} please wait while this happens')
+
     MONSTERS = MakeMonsters(BaseLevel)
     story1(PLAYER, MONSTERS, BaseLevel)
+
+    
+
 def NameMaker(alphabet):
  name=''
  for _ in range(4,random.randint(5,10)):
@@ -104,11 +117,11 @@ def NameMaker(alphabet):
  return mon
 
 if __name__ == '__main__':
-    #  main()
+     main()
 
     #  # testing
-    gui=GUI('x','z')
-    gui.Homescreen()
+    # gui=GUI('x','z')
+    # gui.Homescreen()
     # PLAYER = Player('Testing', 'Mage', 'Fire',1)
     # MONSTERS = MakeMonsters(1)
     # mon = random.choice(MONSTERS)

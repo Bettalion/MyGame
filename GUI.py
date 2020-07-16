@@ -22,22 +22,18 @@ class GUI:
     cont=[]
     elementssum=(var1.get()+var2.get()+var3.get()+var4.get())
     classsum=(vars1.get()+vars2.get()+vars3.get()+vars4.get())
+    difsum=(difl1.get()+difl2.get()+difl3.get()+difl4.get()+difl5.get())
     if classsum > 1 or classsum <=0:
-      print('Invalid class')
+      print('Invalid Class')
       cont.append(False)
       # leave('entered the wrong credentials')
     if elementssum > 1 or elementssum <=0:
-      print('Invalid element')
+      print('Invalid Element')
+      cont.append(False)
+    if difsum > 1 or difsum <=0:
+      print('Invalid Difficulty Level\n')
       cont.append(False)
     if len(cont) == 0:
-     if var1.get() ==1:
-      returnValue.append(sf.elements[0])
-     if var2.get() ==1:
-      returnValue.append(sf.elements[1])
-     if var3.get() ==1:
-      returnValue.append(sf.elements[2])
-     if var4.get() ==1:
-      returnValue.append(sf.elements[3])
      if vars1.get() ==1:
       returnValue.append(sf.classes[0])
      if vars2.get() ==1:
@@ -46,16 +42,43 @@ class GUI:
       returnValue.append(sf.classes[2])
      if vars4.get() ==1:
       returnValue.append(sf.classes[3])
-    # print(returnValue)
-     difflevel=8
-     print(f'The Character you have chosen is:\nNamed: {returnValue[0]}\nClass: {returnValue[2]}  Element: {returnValue[1]}\n\nYou have also chosen difficulty level {difflevel}')
-
+     if var1.get() ==1:
+      returnValue.append(sf.elements[0])
+     if var2.get() ==1:
+      returnValue.append(sf.elements[1])
+     if var3.get() ==1:
+      returnValue.append(sf.elements[2])
+     if var4.get() ==1:
+      returnValue.append(sf.elements[3])
+     if difl1.get() ==1:
+      returnValue.append(1)
+     if difl2.get() ==1:
+      returnValue.append(2)
+     if difl3.get() ==1:
+      returnValue.append(3)
+     if difl4.get() ==1:
+      returnValue.append(4)
+     if difl5.get() ==1:
+      returnValue.append(5)
+     def closehome():
+      Home.destroy()
+      self.closewin()
+     self.ReturnValueChar=returnValue
+     win=Tk()
+     self.win=win
+     win.title('Confirm')
+     Label(win,text=f'The Character you have chosen is:\nNamed: {returnValue[0]}\nClass: {returnValue[1]}  Element: {returnValue[2]}\n\nYou have also chosen difficulty level {returnValue[3]}').grid(column=0,row=0,columnspan=4,rowspan=4)
+    #  print(f'The Character you have chosen is:\nNamed: {returnValue[0]}\nClass: {returnValue[2]}  Element: {returnValue[1]}\n\nYou have also chosen difficulty level {returnValue[3]}')
+     submitb=Button(win,text='Start Game',padx=18,bg='#b65ee6',command=closehome)
+     changeb=Button(win,text='Change Settings',padx=5,bg='#f27f3d',command=self.closewin)
+     submitb.grid(row=5,column=1)
+     changeb.grid(row=5,column=0)
+   
    Label(Home,text=f'Welcome to {sf.gameName}!',bg='light blue',font=("Helvetica Neue", 44)).grid(row=0,column=0,columnspan=8)
    Label(Home,text='A game made by Project Bettalion',bg='light blue',font=("Helvetica Neue", 10,'italic'),pady=25).grid(column=0)
    NameE=Entry(Home,bg='grey')
    NameE.grid(column=1,row=2)
    Label(Home,text='Name:',pady=10,bg='light blue').grid(column=0,row=2)
-  #  Label(Home,text=f'Clases available: {sf.classes}',bg='light blue').grid(column=0,row=3)
    Label(Home,text='Prefered Class:',pady=10,bg='light blue').grid(column=0,row=4)
    vars1=IntVar()
    vars2=IntVar()
@@ -70,7 +93,6 @@ class GUI:
    ClassE3.grid(column=1,row=5)
    ClassE4.grid(column=2,row=5)
    
-  #  Label(Home,text=f'Available elements: {sf.elements}',bg='light blue').grid(column=0,row=5)
    var1=IntVar()
    var2=IntVar()
    var3=IntVar()
@@ -85,10 +107,25 @@ class GUI:
    ElementE3.grid(column=1,row=7)
    ElementE4.grid(column=2,row=7)
    
-   submitb=Button(Home,text='Start Game',bg='red',command=showstates).grid(row=8,columnspan=4)
-   
+   difl1=IntVar()
+   difl2=IntVar()
+   difl3=IntVar()
+   difl4=IntVar()
+   difl5=IntVar()
+   Label(Home,text='What level Would you like to play at?\n Easy ->Insane(1-5):',pady=25,bg='light blue').grid(column=0,row=8)
+   diffl1=Checkbutton(Home,bg='grey',text='1',variable=difl1)
+   diffl2=Checkbutton(Home,bg='grey',text='2',variable=difl2)
+   diffl3=Checkbutton(Home,bg='grey',text='3',variable=difl3)
+   diffl4=Checkbutton(Home,bg='grey',text='4',variable=difl4)
+   diffl5=Checkbutton(Home,bg='grey',text='5',variable=difl5)
+   diffl1.grid(column=1,row=8)
+   diffl2.grid(column=2,row=8)
+   diffl3.grid(column=3,row=8)
+   diffl4.grid(column=4,row=8)
+   diffl5.grid(column=random.randint(2,3),row=9)
+   Button(Home,text='Start Game',bg='#f27f3d',command=showstates).grid(row=10,columnspan=4)
    Home.mainloop()
-   return [] #name,ele,class,diff
+   return self.ReturnValueChar #name,class,ele,diff
  def CapturePet(self,pet):
    win= Tk()
    self.win=win
@@ -279,5 +316,6 @@ class GUI:
    
 
    
-gui=GUI('x','z')
-gui.Homescreen()
+# gui=GUI('x','z')
+# returnValue=gui.Homescreen()
+# print(f'The Character you have chosen is:\nNamed: {returnValue[0]}\nClass: {returnValue[2]}  Element: {returnValue[1]}\n\nYou have also chosen difficulty level {returnValue[3]}')
